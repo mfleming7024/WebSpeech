@@ -5,6 +5,9 @@
 	var stopRecBtn = $("#stopRecButton");
     var resultHTMLElement = $("#result_area");
     
+//    need to find a way to differentiate between computer speech and my speech
+//    var lastResult = "";
+    
     var rec = null;
     var ss = null;
     var SS_supported = false;

@@ -3,7 +3,7 @@
 	var recStatus = $("#recStatus");
 	var startRecBtn = $("#startRecButton");
 	var stopRecBtn = $("#stopRecButton");
-    var resultHTMLElement = $("#result_area");
+    var resultHTMLElement = $("#resultArea");
     
 //    need to find a way to differentiate between computer speech and my speech
 //    var lastResult = "";
@@ -51,7 +51,7 @@
 		       			var str = e.results[i][0].transcript;
 		       			console.log('Recognised: ' + str);
                         speak(str);
-                        resultHTMLElement.html(str);
+                        resultHTMLElement.val(str);
 		       			// conditional if the user said 'hello' then parse it further
 		       			/*if (userSaid(str, 'hello')) {
                             
@@ -65,11 +65,11 @@
 		// Setup listeners for the start and stop recognition buttons
 		startRecBtn.on('click', function(e){
             rec.start();
-			recStatus.html('recognising');
+			recStatus.html('Jarvis is listening');
         });
 		stopRecBtn.on('click', function(e){
             rec.stop();
-			recStatus.html('not recognising');
+			recStatus.html('Click start to begin');
         });
 	}
     

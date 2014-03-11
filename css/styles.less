@@ -1,0 +1,41 @@
+/*Imports*/
+@import "../flatui/reset.less";
+@import "../flatui/column.less";
+@import "../flatui/color.less";
+@import "../flatui/mixin.less";
+//_______________________________________
+
+/*Fonts*/
+.font-face("Manteka", "../fonts/Manteka.ttf");
+//_______________________________________
+
+
+/*Regular Code*/
+h1 {
+    font-family: "Manteka";
+    font-size: 30px;
+    text-align: center;
+}
+
+textarea {
+    border: 1px solid @concrete; 
+    height: 30px;
+    font-size: 20px;
+    font-family: "Manteka";
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;   
+}
+
+input[type=button]#startRecButton {
+    .medium_button(@nephritis);   
+}
+
+input[type=button]#stopRecButton {
+    .medium_button(@pomegranate);   
+}

@@ -2,17 +2,31 @@
 <html lang="">
 <head>
     <meta charset="UTF-8">
-    <title>Web Speech API</title>
-    <link rel="stylesheet" type="text/css" href="">
+    <title>Web Speech API - Jarvis</title>
+    <!--    <link rel="stylesheet" href="css/styles.css" />-->
+    <link type="text/css" rel="stylesheet/less" href="css/styles.less" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.5.0/less.min.js"></script>
 </head>
 
-<body>
-    <p id="recStatus">asdf</p>
+<body class="container">
+    <h1 id="recStatus" class="sixteen columns">Click start to begin</h1>
     
-    <aside id="result_area">asdf</aside>
+    <textarea id="resultArea" class="sixteen columns">Results will appear here</textarea>
     
-    <input type="button" id="startRecButton" value="Start Recording" />
-    <input type="button" id="stopRecButton" value="Stop Recording" />
+    <div class="sixteen columns">
+        
+    </div>
+    
+    <div class="row">
+        <div class="eight columns alpha">
+            <input type="button" id="startRecButton" class="right" value="Start Recording" />
+        </div>
+        <div class="eight columns omega">
+            <input type="button" id="stopRecButton" class="left" value="Stop Recording" />
+        </div>
+    </div>
+    
     
     
     <!-- Scripts -->

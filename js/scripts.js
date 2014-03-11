@@ -1,20 +1,29 @@
 (function() {
 	// Get some required handles
-	var recStatus = document.getElementById('recStatus');
-	var startRecBtn = document.getElementById('startRecBtn');
-	var stopRecBtn = document.getElementById('stopRecBtn');
-    var resultHTMLElement = document.getElementById('result_area');
+	var recStatus = $("#recStatus");
+	var startRecBtn = $("#startRecButton");
+	var stopRecBtn = $("#stopRecButton");
+    var resultHTMLElement = $("#result_area");
+    
+    var rec = null;
+    var ss = null;
+    var SS_supported = false;
+    
+    if ('speechSynthesis' in window) {
+        // Speech synthesis support
+        SS_supported = true;
+        ss = new SpeechSynthesisUtterance();
+    } else {
+        alert("No speech synthesis");   
+    }
 
-	// Define a new speech recognition instance
-	var rec = null;
-	try {
+    try {
 		rec = new webkitSpeechRecognition();
 	} 
 	catch(e) {
-    	document.querySelector('.msg').setAttribute('data-state', 'show');
-    	startRecBtn.setAttribute('disabled', 'true');
-    	stopRecBtn.setAttribute('disabled', 'true');
+    	alert("no speech recognition");
     }
+
     if (rec) {
 		rec.continuous = true;
 		rec.interimResults = false;
@@ -38,28 +47,51 @@
 	       			if (parseFloat(e.results[i][0].confidence) >= parseFloat(confidenceThreshold)) {
 		       			var str = e.results[i][0].transcript;
 		       			console.log('Recognised: ' + str);
-		       			// If the user said 'video' then parse it further
-		       			if (userSaid(str, 'Hello')) {
-		       				console.log("User said hello!!!", + str);
-                            resultHTMLElement.innerHTML(str);
-		       			}
+                        speak(str);
+                        resultHTMLElement.html(str);
+		       			// conditional if the user said 'hello' then parse it further
+		       			/*if (userSaid(str, 'hello')) {
+                            
+		       			}*/
 	       			}
 	        	}
 	    	}
 		};
-
-		// Start speech recognition
-		var startRec = function() {
-			rec.start();
-			recStatus.innerHTML = 'recognising';
-		}
-		// Stop speech recognition
-		var stopRec = function() {
-			rec.stop();
-			recStatus.innerHTML = 'not recognising';
-		}
+        
+        
 		// Setup listeners for the start and stop recognition buttons
-		startRecBtn.addEventListener('click', startRec, false);
-		stopRecBtn.addEventListener('click', stopRec, false);
+		startRecBtn.on('click', function(e){
+            rec.start();
+			recStatus.html('recognising');
+        });
+		stopRecBtn.on('click', function(e){
+            rec.stop();
+			recStatus.html('not recognising');
+        });
 	}
+    
+    var speak = function(str) {
+        if (SS_supported) {
+            ss.text = str;
+            window.speechSynthesis.speak(ss);
+        }
+    };
+    
+    ss.onstart = function(event) {
+        rec.stop();
+    };
+    
+    ss.onend = function(event) {
+        rec.start();
+    };
+    
 })();
+
+
+
+
+
+
+
+
+
